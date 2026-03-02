@@ -78,7 +78,21 @@ app.get("/donors-by-mobile/:mobile", async (req, res) => {
     res.status(500).json({ message: "Error fetching donors" });
   }
 });
+/* ===============================
+   📋 Get all donors (for webpage)
+================================*/
+app.get("/donors", async (req, res) => {
+  try {
+    const donors = await Donor.find()
+      .sort({ receiptDate: -1 })
+      .limit(500); // safety limit
 
+    res.json(donors);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching donors" });
+  }
+});
 
 // const PORT = 5000;
 app.listen(PORT, () => {
