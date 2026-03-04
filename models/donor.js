@@ -9,7 +9,7 @@ const donorSchema = new mongoose.Schema(
     enrolledBy: String,
     donorId: String,
     donorName: String,
-    attendence:{type:Boolean,default:false},
+    attendance:{type:Boolean,default:false},
     mobileNumber: {
       type: String,
       required: true,
