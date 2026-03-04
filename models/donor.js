@@ -9,6 +9,7 @@ const donorSchema = new mongoose.Schema(
     enrolledBy: String,
     donorId: String,
     donorName: String,
+    attendence:{type:Boolean,default:false},
     mobileNumber: {
       type: String,
       required: true,
@@ -18,6 +19,7 @@ const donorSchema = new mongoose.Schema(
     type: String,
   },
   { timestamps: true }
+  
 );
 
 module.exports = mongoose.model("Donor", donorSchema);

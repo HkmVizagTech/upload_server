@@ -93,7 +93,29 @@ app.get("/donors", async (req, res) => {
     res.status(500).json({ message: "Error fetching donors" });
   }
 });
+app.put("/attendance/:mobile", async (req, res) => {
+  try {
+    const mobile = req.params.mobile.trim();
 
+    const donor = await Donor.findOne({ mobileNumber: mobile });
+
+    if (!donor) {
+      return res.status(404).json({ message: "Mobile number not found" });
+    }
+
+    if (donor.attendance) {
+      return res.json({ message: "Attendance already marked" });
+    }
+
+    donor.attendance = true;
+    await donor.save();
+
+    res.json({ message: "Attendance marked successfully", donor });
+
+  } catch (error) {
+    res.status(500).json({ message: "Error updating attendance" });
+  }
+});
 // const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
